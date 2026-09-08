@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: ranking-postgres
+    environment:
+      POSTGRES_DB: ranking
+      POSTGRES_USER: ranking
+      POSTGRES_PASSWORD: ranking
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    container_name: ranking-redis
+    ports:
+      - "6379:6379"
