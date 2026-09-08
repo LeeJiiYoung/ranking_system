@@ -1,11 +1,11 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ranking
+    url: jdbc:postgresql://localhost:15432/ranking
     username: ranking
     password: ranking
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
   data:
     redis:
