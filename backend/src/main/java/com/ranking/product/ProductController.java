@@ -2,6 +2,7 @@ package com.ranking.product;
 
 import com.ranking.product.dto.ProductRequestDto;
 import com.ranking.product.dto.ProductResponseDto;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,14 +27,26 @@ public class ProductController {
     }
 
     /**
-     * 상품조회
+     * 상품조회 (ttl만큼 중복조회 불가)
      * @param productId
      * @return
      */
     @GetMapping("/{productId}")
-    public ProductResponseDto getProduct(@PathVariable Long productId) {
-        Product product = productService.getProduct(productId);
+    public ProductResponseDto getProduct(@PathVariable Long productId, HttpServletRequest request) {
+        Product product = productService.getProduct(productId, resolveViewerId(request));
         return new ProductResponseDto(product.getId(), product.getName(), product.getPrice());
     }
 
+    /**
+     * 조회자 IP 구하기
+     * @param request
+     * @return
+     */
+    private String resolveViewerId(HttpServletRequest request) {
+        String forwarded = request.getHeader("X-Forwarded-For");
+        if (forwarded != null && !forwarded.isBlank()) {
+            return forwarded.split(",")[0].trim();
+        }
+        return request.getRemoteAddr();
+    }
 }

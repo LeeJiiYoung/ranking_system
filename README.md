@@ -74,7 +74,7 @@ PostgreSQL, Redis가 뜬 뒤 `RankingApplication`을 실행하면, DB에 상품�
 - [x] 실시간 랭킹 조회 API (ZREVRANGE, 상품명 조인)
 - [x] Request/Response DTO 분리
 - [x] 앱 시작 시 샘플 데이터 자동 등록
-- [ ] Lua 스크립트로 원자적 처리
+- [x] Lua 스크립트로 원자적 처리
 - [ ] 상위 랭킹 캐시 + 캐시 스탬피드 방지
 - [ ] 일간/주간 랭킹 롤업
 - [ ] 어뷰징 방지 (중복 조회 필터링, HyperLogLog)
