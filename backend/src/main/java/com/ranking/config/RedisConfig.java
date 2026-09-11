@@ -36,4 +36,15 @@ public class RedisConfig {
 		return script;
 	}
 
+	/**
+	 * 스탬피드 방지용 loa
+	 * @return
+	 */
+	@Bean
+	public DefaultRedisScript<Long> unlockScript() {
+		DefaultRedisScript<Long> script = new DefaultRedisScript<>();
+		script.setLocation(new ClassPathResource("scripts/unlock.lua"));
+		script.setResultType(Long.class);
+		return script;
+	}
 }

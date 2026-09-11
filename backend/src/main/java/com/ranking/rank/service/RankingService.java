@@ -1,4 +1,4 @@
-package com.ranking.ranking;
+package com.ranking.rank.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -7,7 +7,6 @@ import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Set;
 
 @Service

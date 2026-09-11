@@ -1,4 +1,4 @@
-package com.ranking.product;
+package com.ranking.product.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

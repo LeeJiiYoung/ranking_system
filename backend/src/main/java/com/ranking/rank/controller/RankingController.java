@@ -1,8 +1,11 @@
-package com.ranking.ranking;
+package com.ranking.rank.controller;
 
-import com.ranking.product.Product;
-import com.ranking.product.ProductRepository;
-import com.ranking.ranking.dto.RankingResponseDto;
+import com.ranking.cache.RankingItem;
+import com.ranking.product.entity.Product;
+import com.ranking.product.repository.ProductRepository;
+import com.ranking.rank.dto.RankingResponseDto;
+import com.ranking.rank.service.RankingCacheService;
+import com.ranking.rank.service.RankingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,7 @@ import java.util.stream.Collectors;
 public class RankingController {
 
     private final RankingService rankingService;
+    private final RankingCacheService rankingCacheService;
     private final ProductRepository productRepository;
 
     /**
@@ -26,8 +30,8 @@ public class RankingController {
      * @param limit
      * @return
      */
-    @GetMapping("/rankings")
-    public List<RankingResponseDto> getRankings(@RequestParam(defaultValue = "10") int limit) {
+    @GetMapping("/deprecated-rankings")
+    public List<RankingResponseDto> getRankingsDeprecated(@RequestParam(defaultValue = "10") int limit) {
         Set<ZSetOperations.TypedTuple<String>> tuples = rankingService.getTopRankings(limit);
 
         List<Long> productIds = tuples.stream()
@@ -46,4 +50,18 @@ public class RankingController {
                 .toList();
     }
 
+    /**
+     * 랭킹 조회하기 (상품명 포함, 캐시 + 스탬피드 방지 적용)
+     * @param limit
+     * @return
+     */
+    @GetMapping("/rankings")
+    public List<RankingResponseDto> getRankings(@RequestParam(defaultValue = "10") int limit) {
+        List<RankingItem> topRanking = rankingCacheService.getTopRanking();
+
+        return topRanking.stream()
+                .limit(limit)
+                .map(item -> new RankingResponseDto(item.productId(), item.productName(), item.viewCount()))
+                .toList();
+    }
 }

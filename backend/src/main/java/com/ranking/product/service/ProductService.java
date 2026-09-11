@@ -1,6 +1,8 @@
-package com.ranking.product;
+package com.ranking.product.service;
 
-import com.ranking.ranking.RankingService;
+import com.ranking.product.entity.Product;
+import com.ranking.product.repository.ProductRepository;
+import com.ranking.rank.service.RankingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

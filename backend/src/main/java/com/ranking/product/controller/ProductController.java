@@ -1,7 +1,10 @@
-package com.ranking.product;
+package com.ranking.product.controller;
 
+import com.ranking.product.repository.ProductRepository;
+import com.ranking.product.service.ProductService;
 import com.ranking.product.dto.ProductRequestDto;
 import com.ranking.product.dto.ProductResponseDto;
+import com.ranking.product.entity.Product;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

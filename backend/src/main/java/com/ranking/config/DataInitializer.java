@@ -1,7 +1,7 @@
 package com.ranking.config;
 
-import com.ranking.product.Product;
-import com.ranking.product.ProductRepository;
+import com.ranking.product.entity.Product;
+import com.ranking.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

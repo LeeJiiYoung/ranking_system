@@ -1,5 +1,6 @@
-package com.ranking.product;
+package com.ranking.product.repository;
 
+import com.ranking.product.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
